@@ -25,7 +25,7 @@ class SessionBlock extends React.Component {
                     user_id: this.props.config.user_id,
                     event_id: this.props.config.event_id,
                     session: {
-                        session_name: this.props.session.session_name,
+                        id: this.props.session.session_id,
                         score: score
                     },
                 }),
