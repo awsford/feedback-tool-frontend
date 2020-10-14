@@ -53,7 +53,7 @@ class App extends React.Component {
             return (
                 <div className="container justify-content-center text-center">
                     <div className="row badge badge-danger m-2 p-2">
-                        <h3>Error: {error.message}</h3>
+                        <h3>Error: This session does not exist</h3>
                     </div>
                 </div>
             )
