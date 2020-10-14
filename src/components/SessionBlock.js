@@ -38,7 +38,6 @@ class SessionBlock extends React.Component {
     }
 
     handleOnMouseEnter = score => () => {
-        console.log("ENTER")
         this.setState({ hoveredScore: score });
     }
 
