@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 
 import ScoreItem from './ScoreItem';
+import '../styles/Session.css';
 
 class Session extends React.Component {
     render() {

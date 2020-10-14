@@ -13,11 +13,3 @@
   width: 100%;
   padding-bottom: 5px;
 }
-
-.vote-select {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
