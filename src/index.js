@@ -10,8 +10,7 @@ import App from './components/App';
 
 const cookies = new Cookies();
 
-// const API_ENDPOINT = process.env.REACT_APP_BACKEND_API;
-const API_ENDPOINT = "https://ylxu707ys2.execute-api.eu-west-1.amazonaws.com/Prod";
+const API_ENDPOINT = process.env.REACT_APP_BACKEND_API;
 
 if (!cookies.get('userID')) cookies.set('userID', short.generate(), { path: '/' });
 const user_id = cookies.get('userID');
