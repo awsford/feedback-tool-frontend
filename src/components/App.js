@@ -1,5 +1,8 @@
 import React from 'react';
-import Options from './Options';
+import { Container } from 'react-bootstrap';
+import SessionBlock from './SessionBlock';
+
+import "../styles/App.css";
 
 class App extends React.Component {
     constructor(props) {
@@ -50,22 +53,20 @@ class App extends React.Component {
             )
         } else {
             return (
-                <div className="vote">
-                    <div className="container">
-                        <div className="title row m-2 text-center justify-content-center">
-                            <h2>
-                                {event_name}
-                                <br />
-                                Session Feedback
-                            </h2>
-                        </div>
-                        <div className="voting-options">
-                            {sessions.map((session, index) => 
-                                <Options key={index} config={config} session={session} />
-                            )}
-                        </div>
+                <Container className="wrapper">
+                    <div className="title row m-2 text-center justify-content-center">
+                        <h2>
+                            {event_name}
+                            <br />
+                            Feedback
+                        </h2>
                     </div>
-                </div>
+                    <div className="voting-options">
+                        {sessions.map((session, index) => 
+                            <SessionBlock key={index} config={config} session={session} />
+                        )}
+                    </div>
+                </Container>
             )
         }
     }

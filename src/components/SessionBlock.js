@@ -1,19 +1,21 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-
 import Card from 'react-bootstrap/Card';
 
-class Options extends React.Component {
+import '../styles/SessionBlock.css';
+import NPS from "./NPS";
+import Session from "./Session";
+
+class SessionBlock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             hide: false,
+            hoveredScore: -1
         };
     }
 
-    handleClick = async (session, score) => {
+    handleSubmit = score => async () => {
         this.setState({ hide: true });
-        console.log(session, score);
 
         try {
             const response = await fetch(this.props.config.api_endpoint + "/scores", {
@@ -23,7 +25,7 @@ class Options extends React.Component {
                     user_id: this.props.config.user_id,
                     event_id: this.props.config.event_id,
                     session: {
-                        session_name: session.session_name,
+                        session_name: this.props.session.session_name,
                         score: score
                     },
                 }),
@@ -35,21 +37,38 @@ class Options extends React.Component {
         }
     }
 
-    renderScores = (session, index) => {
-        return (
-            <span key={index} onClick={() => this.handleClick(session, index)}>
-                <input type="radio" id={this.props.session.session_name + index} name={this.props.session_name} value={index} />
-                <label htmlFor={this.props.session.session_name + index}>☆</label>
-            </span>
-        )
+    handleOnMouseEnter = score => () => {
+        console.log("ENTER")
+        this.setState({ hoveredScore: score });
     }
 
-    renderEmpty = (session, index) => {
+    handleOnMouseLeave = () => {
+        this.setState({ hoveredScore: -1 });
+    }
+
+    renderBlocks() {
+        const { hoveredScore } = this.state;
+        const { session } = this.props;
+
         return (
-            <Button variant="outline-primary" onClick={() => this.handleClick(session, index)}>
-                { session.speaker !== null ? "Didn't Attend" : "Prefer not to Answer"}
-            </Button>
-        )
+            session.type === "NPS"
+                ?
+                    <NPS
+                        session={session}
+                        hoveredScore={hoveredScore}
+                        onMouseLeave={this.handleOnMouseLeave}
+                        onMouseEnter={this.handleOnMouseEnter}
+                        onSubmit={this.handleSubmit}
+                    />
+                :
+                    <Session
+                        session={session}
+                        hoveredScore={hoveredScore}
+                        onMouseLeave={this.handleOnMouseLeave}
+                        onMouseEnter={this.handleOnMouseEnter}
+                        onSubmit={this.handleSubmit}
+                    />
+            )
     }
 
     render() {
@@ -83,14 +102,7 @@ class Options extends React.Component {
                             <h5>Thanks for your feedback!</h5>
                         </div>
                         :
-                        <div>
-                            <div className="vote-select">
-                                {[...Array(session.options)].map((x, i) => this.renderScores(session, session.options-i) )}
-                            </div>
-                            <div className="vote-select row m-2 text-center justify-content-center">
-                                {this.renderEmpty(session, 0)}
-                            </div>
-                        </div>
+                        this.renderBlocks()
                     }
                 </Card.Body>
             </Card>
@@ -98,4 +110,4 @@ class Options extends React.Component {
     }
 }
 
-export default Options;
+export default SessionBlock;
