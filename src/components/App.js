@@ -35,6 +35,17 @@ class App extends React.Component {
             this.setState({ isLoading: false, error: { message: "Unable to retrieve session data" } });
         }
     }
+
+    renderTitle(event_name) {
+        if (event_name === null) return null;
+        return (
+            <div className="title row m-2 text-center justify-content-center">
+                <h2>
+                    {event_name}
+                </h2>
+            </div>
+        )
+    }
   
     render() {
         const {config, event_name, isLoading, sessions, error} = this.state;
@@ -54,13 +65,8 @@ class App extends React.Component {
         } else {
             return (
                 <Container className="wrapper">
-                    <div className="title row m-2 text-center justify-content-center">
-                        <h2>
-                            {event_name}
-                            <br />
-                            Feedback
-                        </h2>
-                    </div>
+                    {this.renderTitle(event_name)}
+                    
                     <div className="voting-options">
                         {sessions.map((session, index) => 
                             <SessionBlock key={index} config={config} session={session} />
