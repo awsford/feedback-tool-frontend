@@ -76,7 +76,7 @@ class SessionBlock extends React.Component {
         const date = new Date(session.date_time * 1000);
         return (
             <Card>
-                <Card.Header>{session.session_name}</Card.Header>
+                <Card.Header>{session.name}</Card.Header>
                 <Card.Body>
                     {
                         session.speaker !== null
