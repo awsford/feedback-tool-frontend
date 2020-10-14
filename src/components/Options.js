@@ -28,9 +28,7 @@ class Options extends React.Component {
                     },
                 }),
             })
-            console.log(response);
-            const json = await response.json();
-            console.log(json);
+            await response.json();
         }
         catch (e) {
             console.log(e);
