@@ -90,7 +90,7 @@ class SessionBlock extends React.Component {
                         session.date_time !== null
                         ?
                             <Card.Subtitle className="mb-2 text-muted">
-                                Date: {date.toUTCString()}
+                                Date: {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
                             </Card.Subtitle>
                         : null
                     }
