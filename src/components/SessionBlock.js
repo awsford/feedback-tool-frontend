@@ -25,7 +25,7 @@ class SessionBlock extends React.Component {
                     user_id: this.props.config.user_id,
                     event_id: this.props.config.event_id,
                     session: {
-                        id: this.props.session.session_id,
+                        id: this.props.session.id,
                         score: score
                     },
                 }),
@@ -77,7 +77,7 @@ class SessionBlock extends React.Component {
         const date = new Date(session.date_time * 1000);
         return (
             <Card>
-                <Card.Header>{session.session_name}</Card.Header>
+                <Card.Header>{session.name}</Card.Header>
                 <Card.Body>
                     {
                         session.speaker !== null
